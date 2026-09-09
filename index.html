@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>川山小牧喜 · 项目模式板块（共富飞轮）· 网页版PPT P10-18 · v2</title>
+<style>
+  :root{
+    --main:#18489C; --main-d:#0A2C66; --main-l:#E3EBF7;
+    --gold:#C9A45C; --gold-d:#A8843D; --gold-l:#E9CE8F; --gold-bg:#FBF4E4;
+    --paper:#F7FAFE; --paper-d:#EDF2F9; --card:#FFFFFF;
+    --ink:#23304A; --ink-l:#55617A;
+    --line:#DCE5F1;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:var(--paper); color:var(--ink);
+    font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif; overflow:hidden;}
+  .deck{height:100vh; display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth;
+    background:
+      radial-gradient(1100px 480px at 88% -8%, rgba(201,164,92,.13), transparent 60%),
+      radial-gradient(850px 420px at -4% 108%, rgba(24,72,156,.07), transparent 55%),
+      var(--paper);}
+  section.slide{min-width:100vw; height:100vh; scroll-snap-align:start; position:relative;
+    padding:6.6vh 5vw 5.2vh; overflow:hidden; display:flex; flex-direction:column;}
+  section.slide::before{content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:linear-gradient(rgba(24,72,156,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(24,72,156,.03) 1px,transparent 1px);
+    background-size:46px 46px;}
+  section.slide::after{content:""; position:absolute; top:0; left:0; right:0; height:5px;
+    background:linear-gradient(90deg,var(--main) 0 68%,var(--gold) 68% 87%,var(--gold-l) 87% 100%); opacity:.95;}
+  .head{display:flex; align-items:baseline; gap:14px; margin-bottom:2.2vh; position:relative; z-index:2}
+  .chip{font-size:11.5px; letter-spacing:2.5px; color:#fff; background:var(--main);
+    padding:4px 13px 4px 11px; border-radius:2px; font-weight:700; white-space:nowrap}
+  .chip.gold{background:var(--gold-d)} .chip.green{background:#2F7D5C}
+  .crumb{font-size:12px; color:var(--ink-l); letter-spacing:1.4px; white-space:nowrap}
+  .crumb b{color:var(--main); font-weight:700}
+  .pos{margin-left:auto; font-family:"Noto Serif SC","Songti SC",serif; font-size:13px; letter-spacing:1.5px; color:var(--ink-l); white-space:nowrap}
+  .pos b{font-size:21px; color:var(--main); font-weight:900}
+  .pos i{font-style:normal; color:var(--gold-d)}
+  h1{font-family:"Noto Serif SC","Source Han Serif SC","Songti SC","SimSun",serif;
+    font-size:clamp(26px,3.7vh,42px); font-weight:900; letter-spacing:1.5px; line-height:1.26;
+    margin-bottom:1vh; position:relative; z-index:2;}
+  h1 .thin{font-weight:500; color:var(--ink-l); font-size:.58em; letter-spacing:3px; display:block; margin-bottom:.4vh}
+  h1 em{font-style:normal; color:var(--main)}
+  h2.sub{font-size:clamp(13px,1.72vh,16px); color:var(--ink-l); font-weight:500; letter-spacing:.8px;
+    line-height:1.78; max-width:92%; position:relative; z-index:2; margin-bottom:1.6vh}
+  h2.sub b{color:var(--main)}
+  .body{flex:1; display:flex; flex-direction:column; gap:1.9vh; position:relative; z-index:2; min-height:0}
+  .row{display:grid; gap:1.3vw; min-height:0}
+  .c2{grid-template-columns:1.08fr .92fr} .c2e{grid-template-columns:1fr 1fr}
+  .c3{grid-template-columns:repeat(3,1fr)} .c4{grid-template-columns:repeat(4,1fr)}
+  .c23{grid-template-columns:1.35fr 1fr} .c32{grid-template-columns:1fr 1.35fr}
+  .c64{grid-template-columns:1.6fr 1fr}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:9px;
+    padding:1.9vh 1.25vw; position:relative; box-shadow:0 8px 22px -16px rgba(40,60,110,.4); min-height:0}
+  .card h3{font-family:"Noto Serif SC","Songti SC","SimSun",serif;
+    font-size:clamp(14px,1.85vh,17.5px); color:var(--main); letter-spacing:1px;
+    margin-bottom:.9vh; display:flex; align-items:center; gap:8px; line-height:1.3}
+  .card h3::before{content:""; width:5px; height:15px; background:linear-gradient(var(--main),var(--gold-d)); border-radius:2px; flex:none}
+  .card h3 .en{font-size:.62em; color:var(--gold-d); letter-spacing:2px; font-family:"Microsoft YaHei",sans-serif}
+  .tag{font-size:10px; letter-spacing:1.6px; color:#fff; background:var(--gold-d);
+    padding:2px 9px; border-radius:10px; margin-left:auto; font-weight:700; white-space:nowrap}
+  .tag.blue{background:var(--main)} .tag.green{background:#2F7D5C}
+  p{font-size:clamp(13px,1.72vh,16px); line-height:1.82; color:#3c465c; letter-spacing:.2px}
+  p+p{margin-top:.6vh}
+  li{font-size:clamp(13px,1.72vh,16px); line-height:1.78; color:#3c465c; margin-left:1.2em; margin-bottom:.28vh}
+  li::marker{color:var(--gold-d)}
+  b.k{color:var(--main)}
+  ul.tight{margin-top:.3vh}
+  /* 统一小字与脚注 */
+  .note{font-size:10.3px; color:var(--ink-l); opacity:.85; letter-spacing:.3px; line-height:1.55}
+  .note b{color:var(--main)}
+  /* 数据卡体系 */
+  .stat{background:var(--card); border:1px solid var(--line); border-top:4px solid var(--main);
+    border-radius:8px; padding:1.7vh .7vw 1.4vh; text-align:center; box-shadow:0 8px 20px -16px rgba(40,60,110,.45)}
+  .stat .num{font-family:"Noto Serif SC","Songti SC",serif; font-size:clamp(27px,4.9vh,52px);
+    font-weight:900; color:var(--main); line-height:1.06; letter-spacing:.5px}
+  .stat .num small{font-size:.42em; font-weight:700; color:var(--gold-d)}
+  .stat .lab{margin-top:.7vh; font-size:clamp(11px,1.42vh,13.5px); color:var(--ink-l); letter-spacing:1.2px; line-height:1.6}
+  .stat .lab b{color:var(--ink)}
+  .stat.gt{border-top-color:var(--gold-d)} .stat.gt .num{color:var(--gold-d)}
+  /* 表格统一 */
+  table{width:100%; border-collapse:collapse; font-size:clamp(12px,1.55vh,14.5px)}
+  th{background:var(--main); color:#fff; font-weight:700; letter-spacing:.8px; padding:.7vh .6vw; text-align:left; white-space:nowrap}
+  th:nth-child(2){background:var(--main-d)}
+  td{padding:.62vh .6vw; border-bottom:1px solid #E7EDF6; line-height:1.55; color:#3c465c}
+  tr:nth-child(even) td{background:#F5F8FD}
+  td b{color:var(--main)}
+  /* 流程链 */
+  .chain{display:flex; gap:0}
+  .chain .nd{flex:1; text-align:center; padding:1.3vh .5vw; background:linear-gradient(180deg,#fff,#F3F7FC);
+    border:1px solid var(--line); border-radius:6px; position:relative}
+  .chain .nd b{display:block; color:var(--main); font-size:clamp(12.5px,1.6vh,15px); letter-spacing:1px; margin-bottom:.3vh}
+  .chain .nd span{font-size:clamp(10.5px,1.3vh,12.5px); color:var(--ink-l); line-height:1.55; display:block}
+  .chain .nd::after{content:"➤"; position:absolute; right:-11px; top:50%; transform:translateY(-50%); color:var(--gold-d); font-size:13px; z-index:3}
+  .chain .nd:last-child::after{display:none}
+  .chain .nd:last-child{border-color:var(--gold-d); background:linear-gradient(180deg,#FEFBF2,#F7EBD2)}
+  /* 照片 */
+  .photo{position:relative; border-radius:9px; overflow:hidden; border:1px solid var(--line); box-shadow:0 12px 26px -16px rgba(30,50,100,.45)}
+  .photo img{width:100%; height:100%; object-fit:cover; display:block; position:absolute; inset:0}
+  .photo .cap{position:absolute; left:0; right:0; bottom:0; padding:.7vh .8vw; background:linear-gradient(transparent,rgba(8,22,48,.78));
+    color:#fff; font-size:clamp(10.5px,1.3vh,12.5px); letter-spacing:1.2px; z-index:2}
+  .photo .cap i{font-style:normal; color:var(--gold-l)}
+  .photo .ph{position:relative; height:100%}
+  /* 引语 */
+  .quote{border-left:4px solid var(--main); background:linear-gradient(90deg,#EEF3FA,transparent 85%);
+    padding:1.2vh 1.3vw; border-radius:0 8px 8px 0;
+    font-family:"Noto Serif SC","Songti SC",serif; font-size:clamp(13px,1.75vh,16.5px); color:#40506e; letter-spacing:.8px}
+  .quote b{color:var(--main)}
+  /* 股权环 */
+  .ringwrap{display:flex; align-items:center; gap:1.4vw}
+  .ring{width:clamp(120px,19vh,185px); height:clamp(120px,19vh,185px); border-radius:50%; position:relative; flex:none;
+    background:conic-gradient(var(--main) 0 51%, var(--gold-l) 51% 100%);}
+  .ring::after{content:""; position:absolute; inset:15%; background:var(--card); border-radius:50%; box-shadow:0 0 0 1px var(--line)}
+  .ring .rl{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:2; font-family:"Noto Serif SC","Songti SC",serif}
+  .ring .rl b{font-size:clamp(20px,3.4vh,30px); color:var(--main); font-weight:900}
+  .ring .rl span{font-size:10.5px; color:var(--ink-l); letter-spacing:2px}
+  .ring .r51{position:absolute; top:12%; right:6%; transform:translateX(50%); background:var(--main); color:#fff; font-size:11px; font-weight:700; padding:2px 9px; border-radius:10px; z-index:3}
+  .ring .r49{position:absolute; bottom:14%; left:2%; transform:translateX(-50%); background:var(--gold-l); color:#6b5223; font-size:11px; font-weight:700; padding:2px 9px; border-radius:10px; z-index:3; white-space:nowrap}
+  .legend{display:flex; flex-direction:column; gap:1vh}
+  .legend .lg{display:flex; align-items:center; gap:9px; font-size:clamp(12px,1.5vh,14px); color:#3c465c}
+  .legend .sw{width:15px; height:15px; border-radius:3px; flex:none}
+  .legend b{color:var(--main)}
+  /* 时间线 */
+  .tl{position:relative; padding-left:2.1vw}
+  .tl::before{content:""; position:absolute; left:.55vw; top:.6vh; bottom:.6vh; width:3px; background:linear-gradient(var(--main),var(--gold-d)); border-radius:2px}
+  .tl .it{position:relative; margin-bottom:1.4vh}
+  .tl .it:last-child{margin-bottom:0}
+  .tl .it::before{content:""; position:absolute; left:-2.1vw; top:.7vh; width:13px; height:13px; border-radius:50%;
+    background:#fff; border:3.5px solid var(--main); box-shadow:0 0 0 2px #fff}
+  .tl .it h4{font-size:clamp(13.5px,1.75vh,16px); color:var(--main); letter-spacing:.8px; margin-bottom:.35vh}
+  .tl .it h4 span{font-weight:500; color:var(--ink-l); font-size:.88em; margin-left:8px}
+  /* 页脚 */
+  .foot{position:absolute; bottom:1.9vh; left:5vw; right:5vw; z-index:3; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--line); padding-top:.9vh}
+  .pn{font-family:"Noto Serif SC",serif; font-size:12.5px; letter-spacing:2px; color:var(--ink-l)}
+  .pn b{font-size:20px; color:var(--main); font-weight:900}
+  .pn i{font-style:normal; color:var(--gold-d)}
+  .br{font-size:11px; letter-spacing:2.2px; color:var(--ink-l)}
+  .br b{color:var(--main); font-weight:800}
+  .dots{position:fixed; right:1.4vw; top:50%; transform:translateY(-50%); z-index:60; display:flex; flex-direction:column; gap:10px}
+  .dots a{width:9px; height:9px; border-radius:50%; background:var(--gold); opacity:.5; transition:.25s; border:1px solid rgba(24,72,156,.25)}
+  .dots a.on{background:var(--main); opacity:1; transform:scale(1.45)}
+  .hint{position:fixed; bottom:1.2vh; right:1.4vw; z-index:60; font-size:10.5px; color:var(--ink-l); letter-spacing:.8px;
+    background:rgba(255,255,255,.88); padding:3px 10px; border-radius:12px; border:1px solid var(--line)}
+  .gearbar{display:flex; gap:.6vw; margin-bottom:1.5vh; position:relative; z-index:2}
+  .gearbar .g{font-size:11px; letter-spacing:1px; padding:3.5px 12px; border-radius:13px; border:1px solid var(--line); color:var(--ink-l); background:rgba(255,255,255,.6)}
+  .gearbar .g.on{background:var(--main); color:#fff; border-color:var(--main); font-weight:700}
+  .gearbar .g.past{background:var(--gold-bg); border-color:var(--gold-l); color:var(--gold-d)}
+  @media (max-width:900px){ .c2,.c2e,.c3,.c4,.c23,.c32,.c64{grid-template-columns:1fr} section.slide{overflow-y:auto; padding:5vh 6vw 8vh} }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- ═══════ P10 齿轮1开篇 · 数据通栏式 ═══════ -->
+<section class="slide">
+  <div class="head"><span class="chip">齿轮 1 · 品质齿轮</span><span class="crumb">项目模式 / 高标准牦牛肉</span><span class="pos"><b>10</b> / 18 <i>· 齿轮1</i></span></div>
+  <h1><span class="thin">GEAR 1 · QUALITY</span>高标准牦牛肉：<em>从雪山牧场到餐桌</em>的品质底座</h1>
+  <h2 class="sub">海拔3000米以上半野生放养 + <b>0兽药 / 0抗生素 / 重金属仅国标1/50</b>——项目以硬核品质标准，为共富飞轮生态奠定最坚实的原料底座。</h2>
+  <div class="body">
+    <div class="row c3">
+      <div class="stat"><div class="num">0<small> 兽药 · 抗生素</small></div><div class="lab">全程不使用，天然规避<b>药残风险</b></div></div>
+      <div class="stat gt"><div class="num">1/50<small> 国标</small></div><div class="lab">原料<b>重金属含量</b>仅为国家标准 1/50</div></div>
+      <div class="stat"><div class="num">98<small>%</small></div><div class="lab">「三点放血」工艺血液排出率</div></div>
+    </div>
+    <div class="row c23">
+      <div class="card">
+        <h3>牦牛肉 vs 普通黄牛肉 · 科研实测全对比 <span class="en">NUTRITION</span></h3>
+        <table>
+          <tr><th>指标</th><th>牦牛肉</th><th>黄牛肉</th><th>对比结论</th></tr>
+          <tr><td>蛋白质</td><td><b>22.5g</b>/100g</td><td>16–20g</td><td>含量高 37%</td></tr>
+          <tr><td>脂肪</td><td><b>1–5g</b>/100g</td><td>5–20g</td><td>仅为普通牛肉 1/3–1/5</td></tr>
+          <tr><td>Omega-3</td><td><b>≈120mg</b>/100g</td><td>≈40mg</td><td>为普通牛肉 3 倍</td></tr>
+          <tr><td>铁 / 锌</td><td><b>4.0 / 4.28mg</b></td><td>2.5–3.0 / 3.0–3.5</td><td>高 30%–60% / 22%–43%</td></tr>
+          <tr><td>胆固醇</td><td><b>58mg</b>/100g</td><td>70–90mg</td><td>含量更低、更健康</td></tr>
+          <tr><td>氨基酸</td><td><b>85.75g</b>/100g</td><td>低于牦牛水平</td><td>覆盖人体必需氨基酸</td></tr>
+        </table>
+        <div class="note" style="margin-top:.6vh">营养指标由高校科研团队按国标方法实测（氨基酸自动分析 / 原子吸收光谱 / GC-MS 等），并每批次经 CMA 机构全项检测。</div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1.5vh; min-height:0">
+        <div class="photo" style="flex:1.25"><div class="ph"><img src="images/herd.jpg" alt="松潘牦牛群"></div><div class="cap">天然牧草 · 雪线百草 · 冰川融水 —— <i>松潘高原半野生牦牛</i></div></div>
+        <div class="card" style="flex:1">
+          <h3>品质标准闭环</h3>
+          <ul class="tight">
+            <li>出栏周期约 <b class="k">36 月龄</b>，慢养出好肉</li>
+            <li>产品三级分级：<b class="k">优级 / 一级 / 合格</b></li>
+            <li>清真文化「不售死牛、病牛」伦理约束</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="quote">「源头零药残、营养全超越、批次可检测」——<b>齿轮1为整个飞轮提供不可替代的原料信任状</b>。</div>
+  </div>
+  <div class="foot"><div class="pn"><b>10</b> / 18 <i>共富飞轮 · 齿轮1 品质</i></div><div class="br">川山小牧喜 · <b>牧企同兴 川藏共富</b></div></div>
+</section>
+
+<!-- ═══════ P11 生态保障 · 仪表盘+保障卡式 ═══════ -->
+<section class="slide">
+  <div class="head"><span class="chip">齿轮 1 · 品质齿轮</span><span class="crumb">项目模式 / 高原良好生态基础保障</span><span class="pos"><b>11</b> / 18 <i>· 齿轮1</i></span></div>
+  <h1><span class="thin">GEAR 1 · QUALITY — 生态即壁垒</span>雪域高原的<em>三重原生品质保障</em></h1>
+  <h2 class="sub">品质的起点不是工艺，而是牧场本身。松潘核心牧区以严苛生态指标 + <b>三重原生保障</b>，从源头筑起难以复制的品质壁垒。</h2>
+  <div class="body">
+    <div class="row c32">
+      <div style="display:flex; flex-direction:column; gap:1.6vh; min-height:0">
+        <div class="row c4">
+          <div class="stat"><div class="num" style="font-size:clamp(19px,3.2vh,34px)">3000–4000<small>m</small></div><div class="lab">核心牧区平均海拔</div></div>
+          <div class="stat gt"><div class="num" style="font-size:clamp(19px,3.2vh,34px)">2400–2800<small>h</small></div><div class="lab">年日照时长</div></div>
+          <div class="stat"><div class="num" style="font-size:clamp(19px,3.2vh,34px)">600–800<small>mm</small></div><div class="lab">年降水量</div></div>
+          <div class="stat gt"><div class="num" style="font-size:clamp(16px,2.7vh,28px)">富硒·锌<small>土壤</small></div><div class="lab">矿物质自然富集</div></div>
+        </div>
+        <div class="card">
+          <h3>三重原生保障体系 <span class="tag blue">0 药残的制度根源</span></h3>
+          <div class="row c3" style="margin-top:.4vh">
+            <div><p><b class="k">① 文化约束</b><br>清真「不售死牛、病牛」千年准则与屠宰伦理，辐射全球超 <b class="k">30 亿</b>人群饮食结构</p></div>
+            <div><p><b class="k">② 地理防疫</b><br>地广人稀、牛群密度低，疫病风险天然降低，从源头减少用药需求</p></div>
+            <div><p><b class="k">③ 生态政策</b><br>毗邻<b class="k">九寨沟国家级自然保护区</b>，饲草符合绿色养殖标准</p></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>科研实测营养指标 <span class="tag">双重检测背书</span></h3>
+          <div class="row c3" style="margin-top:.2vh">
+            <div class="stat" style="box-shadow:none"><div class="num" style="font-size:clamp(18px,3vh,30px)">≥22<small>g/100g</small></div><div class="lab">蛋白质（牛霖最高 <b>23.13g</b>）</div></div>
+            <div class="stat gt" style="box-shadow:none"><div class="num" style="font-size:clamp(18px,3vh,30px)">≤5<small>g/100g</small></div><div class="lab">脂肪（上脑仅 <b>2.11g</b>）</div></div>
+            <div class="stat" style="box-shadow:none"><div class="num" style="font-size:clamp(16px,2.8vh,26px)">0·0·0<small></small></div><div class="lab"><b>兽药 · 抗生素 · 病菌</b> 全为零</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1.5vh; min-height:0">
+        <div class="photo" style="flex:2"><div class="ph"><img src="images/pasture1.jpg" alt="松潘高原牧场"></div><div class="cap">零污染高原环境 · 半野生放养 —— <i>松潘牧场实拍</i></div></div>
+        <div class="card" style="flex:1">
+          <h3>为什么是松潘？</h3>
+          <ul class="tight">
+            <li>项目核心牧区地处<b class="k">川西高原生态屏障区</b>，与九寨沟、黄龙共享同一生态带</li>
+            <li>检测方式：项目自检 + <b class="k">四川省农畜产品质量安全检验检测中心</b>及第三方抽检</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div class="pn"><b>11</b> / 18 <i>共富飞轮 · 齿轮1 品质</i></div><div class="br">川山小牧喜 · <b>牧企同兴 川藏共富</b></div></div>
+</section>
+
+<!-- ═══════ P12 工艺×溯源 · 双链式 ═══════ -->
+<section class="slide">
+  <div class="head"><span class="chip">齿轮 1 · 品质齿轮</span><span class="crumb">项目模式 / 溯源体系与特色屠宰工艺</span><span class="pos"><b>12</b> / 18 <i>· 齿轮1</i></span></div>
+  <h1><span class="thin">GEAR 1 · QUALITY — 工艺铸味 · 溯源立信</span>非遗屠宰工艺 × 区块链溯源：<em>好味道与信任感并重</em></h1>
+  <h2 class="sub">一头好牛，一半靠养、一半靠宰。项目以「非遗级屠宰工艺 + 区块链全程溯源 + 团体标准」让高原风味与消费信任同时落地。</h2>
+  <div class="body">
+    <div class="card">
+      <h3>「三点固定、一刀放血」非遗级工艺 <span class="tag blue">源自清真传统 · 已申报非遗</span><span class="en" style="margin-left:8px">SLAUGHTER</span></h3>
+      <div class="chain">
+        <div class="nd"><b>固定三腿</b><span>定制专用刀具</span></div>
+        <div class="nd"><b>精准断脉</b><span>一刀切断动脉</span></div>
+        <div class="nd"><b>保留蹬踏</b><span>单腿自然蹬踏</span></div>
+        <div class="nd"><b>98% 排血</b><span>血液充分排出</span></div>
+        <div class="nd"><b>风味升级</b><span>少腥 · 鲜嫩 · 保鲜长</span></div>
+      </div>
+    </div>
+    <div class="row c2">
+      <div class="card">
+        <h3>区块链溯源 · 全生命周期不可篡改 <span class="tag">可视化信任</span></h3>
+        <p>联合高校与科农局搭建松潘牦牛专属信息数据库，以<b class="k">区块链记录品种、月龄、牧养区域</b>等养殖 / 屠宰 / 仓储 / 流通全环节信息，检测数据与养殖信息实时绑定——养殖源头到终端餐桌全程可查、来源可溯。</p>
+        <div class="chain" style="margin-top:1.1vh">
+          <div class="nd"><b>养殖</b><span>牧场档案</span></div>
+          <div class="nd"><b>屠宰</b><span>工艺参数</span></div>
+          <div class="nd"><b>流通</b><span>冷链温控</span></div>
+          <div class="nd"><b>餐桌</b><span>扫码可查</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>团体标准 + 全链品控 <span class="tag blue">已立项</span></h3>
+        <ul class="tight">
+          <li>联合<b class="k">四川农业大学食品学院</b>、松潘县科农局制定《高原牦牛肉生产及质量分级》团体标准</li>
+          <li>覆盖养殖（约36月龄出栏）→ 屠宰 → <b class="k">优级/一级/合格三级分级</b> → 包装运输全环节</li>
+          <li>风味检测：电子鼻 + GC-MS 检出风味物质 <b class="k">≥70 种</b>（上脑 74 种）</li>
+          <li>冷链：京东战略合作，全程 <b class="k">≤4℃</b>，成渝核心市场<b class="k">「次日达」</b>，冷链数据同步上链</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quote">「把工艺做成标准、把信任做成数据」——<b>品质齿轮由此成为整个飞轮最坚实的底座</b>。</div>
+  </div>
+  <div class="foot"><div class="pn"><b>12</b> / 18 <i>共富飞轮 · 齿轮1 品质</i></div><div class="br">川山小牧喜 · <b>牧企同兴 川藏共富</b></div></div>
+</section>
+
+<!-- ═══════ P13 合作社股权 · 圆环中心式 ═══════ -->
+<section class="slide">
+  <div class="head"><span class="chip">齿轮 1 · 品质齿轮</span><span class="crumb">项目模式 / 牧喜共富合作社 · 股权创新</span><span class="pos"><b>13</b> / 18 <i>· 齿轮1</i></span></div>
+  <h1><span class="thin">GEAR 1 · QUALITY — 让牧民成为控股人</span>牧喜共富合作社：<em>牧民持股 51%</em> 的股权革命</h1>
+  <h2 class="sub">牧民是产业链的起点，却长期站在利益分配的末端。项目在松潘县乡村振兴局与科农局支持下创立牧喜共富合作社，以股权创新从根上改变牧民地位。</h2>
+  <div class="body">
+    <div class="row c23">
+      <div class="card" style="display:flex; align-items:center; justify-content:center">
+        <div class="ringwrap">
+          <div class="ring"><span class="r51">牧民 51%</span><span class="r49">企业 49%</span><div class="rl"><b>51%</b><span>牧民集体持股</span></div></div>
+          <div class="legend">
+            <div class="lg"><span class="sw" style="background:var(--main)"></span><b>牧民集体 51%</b> —— 重大决策最终话语权</div>
+            <div class="lg"><span class="sw" style="background:var(--gold-l)"></span><b>企业 49%</b> —— 品牌 / 技术 / 渠道资源赋能</div>
+            <div class="lg" style="font-size:clamp(11px,1.4vh,13px); color:var(--ink-l)">「一股一票」社员代表大会决策，重大经营、投资、收益分配须经表决</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1.5vh; min-height:0">
+        <div class="card" style="flex:1.15">
+          <h3>治理结构 <span class="en">GOVERNANCE</span></h3>
+          <div class="row c3" style="margin-top:.2vh">
+            <div><p style="font-size:clamp(12px,1.5vh,14px)"><b class="k">社员代表大会</b><br>一股一票 · 重大事项表决</p></div>
+            <div><p style="font-size:clamp(12px,1.5vh,14px)"><b class="k">理事会</b><br>牧民代表 + 产业专业人才</p></div>
+            <div><p style="font-size:clamp(12px,1.5vh,14px)"><b class="k">独立监事会</b><br>全程监督 · 信息公开</p></div>
+          </div>
+        </div>
+        <div class="card" style="flex:1">
+          <h3>身份的转变，是这场实验的核心</h3>
+          <div class="row c2e" style="margin-top:.3vh">
+            <div><p style="font-size:clamp(12px,1.55vh,14.5px)"><b class="k">牧民：</b>「被收购者」→「产业股东」<br><span style="color:var(--ink-l);font-size:.92em">共享加工 / 文旅 / 品牌溢价全链收益</span></p></div>
+            <div><p style="font-size:clamp(12px,1.55vh,14.5px)"><b class="k">企业：</b>「产业链主导者」→「服务赋能者」<br><span style="color:var(--ink-l);font-size:.92em">提供品牌 / 技术 / 渠道，支持合作社运营</span></p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row c4">
+      <div class="stat"><div class="num" style="font-size:clamp(19px,3.4vh,36px)">3<small> 乡镇</small></div><div class="lab">覆盖松潘县 <b>12 个行政村</b></div></div>
+      <div class="stat gt"><div class="num" style="font-size:clamp(19px,3.4vh,36px)">700<small> 户</small></div><div class="lab">牧民已加入合作社</div></div>
+      <div class="stat"><div class="num" style="font-size:clamp(17px,3vh,32px)">≥1.5<small> 万元</small></div><div class="lab">合作社牧民<b>户均年增收</b></div></div>
+      <div class="stat gt"><div class="num" style="font-size:clamp(17px,3vh,32px)">30→68<small>%</small></div><div class="lab">养殖标准化率显著提升</div></div>
+    </div>
+    <div class="note">* 统计口径：2024年10月 — 2026年5月；合作社获松潘县乡村振兴局、科农局支持；「标准化率提升」自项目实施前不足 30%。</div>
+  </div>
+  <div class="foot"><div class="pn"><b>13</b> / 18 <i>共富飞轮 · 齿轮1 品质</i></div><div class="br">川山小牧喜 · <b>牧企同兴 川藏共富</b></div></div>
+</section>
+
+<!-- ═══════ P14 三重保障 · 测算公式带式 ═══════ -->
+<section class="slide">
+  <div class="head"><span class="chip">齿轮 1 · 品质齿轮</span><span class="crumb">项目模式 / 三重保障机制 · 牧民增收</span><span class="pos"><b>14</b> / 18 <i>· 齿轮1</i></span></div>
+  <h1><span class="thin">GEAR 1 · QUALITY — 让每一份辛苦都算数</span>三重保障机制：<em>牧民的增收安全网</em></h1>
+  <h2 class="sub">股权解决「分多少」，机制解决「稳不稳」。<b>溢价收购 + 政策补贴 + 技能培训</b>，让牧民真正分享产业链增值红利。</h2>
+  <div class="body">
+    <div class="card" style="background:linear-gradient(90deg,#F0F5FC,#FDF9EE); border-color:var(--gold-l)">
+      <div style="display:flex; align-items:center; gap:.8vw; flex-wrap:wrap">
+        <span style="font-weight:800; color:var(--main); letter-spacing:1px; font-size:clamp(13px,1.7vh,16px)">① 溢价收购 · 增收测算</span>
+        <span style="font-size:clamp(12px,1.6vh,15px); color:#3c465c">松潘年出栏 <b class="k">≈3万头</b> × 每头 <b class="k">5,000元</b>基准价 × 高于市场价 <b class="k">5%~10%</b></span>
+        <span style="font-family:'Noto Serif SC',serif; font-weight:900; color:var(--gold-d); font-size:clamp(15px,2.1vh,20px)">= 牧民年直接增收 750万–1,500万元</span>
+      </div>
+    </div>
+    <div class="row c3">
+      <div class="card" style="border-top:4px solid var(--main)">
+        <h3>① 溢价收购 <span class="tag blue">直接增收</span></h3>
+        <ul class="tight">
+          <li>高于当地市场价 <b class="k">5%–10%</b> 定向收购</li>
+          <li>收购价+产量双锁定，<b class="k">旱涝保收</b></li>
+          <li>已成功申报<b class="k">松潘牦牛地理标志产品</b>，销售单价较市场均值再提升 15%（区域成效口径）</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top:4px solid var(--gold-d)">
+        <h3>② 政策补贴 <span class="tag">三层收入保障</span></h3>
+        <ul class="tight">
+          <li>中央预算内投资最高覆盖项目总投资 <b class="k">50%</b></li>
+          <li>＋四川省特色农牧产业扶持资金</li>
+          <li>＋牦牛产业三产融合专项补贴</li>
+          <li>＝「<b class="k">企业补贴 + 政府补贴 + 合作社分红</b>」三层结构</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top:4px solid #2F7D5C">
+        <h3>③ 技能培训 <span class="tag green">造血能力</span></h3>
+        <ul class="tight">
+          <li>联合<b class="k">四川农业大学</b>每年培训 ≥300 人次</li>
+          <li>疫病防控 · 草场轮牧 · 直播带货 · 溯源系统 · 食品安全标准</li>
+          <li>培养「<b class="k">会养牛、懂标准、能增收</b>」新型牧民</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row c2">
+      <div class="card" style="display:flex; align-items:center">
+        <div style="width:100%">
+          <h3>看得见的改变</h3>
+          <div class="row c3">
+            <div class="stat" style="box-shadow:none"><div class="num" style="font-size:clamp(17px,3vh,30px)">5%→20%<small></small></div><div class="lab">牧民<b>非牧业收入</b>占比跃升</div></div>
+            <div class="stat gt" style="box-shadow:none"><div class="num" style="font-size:clamp(17px,3vh,30px)">68<small>%</small></div><div class="lab">养殖标准化率（原不足30%）</div></div>
+            <div class="stat" style="box-shadow:none"><div class="num" style="font-size:clamp(17px,3vh,30px)">86<small>+200</small></div><div class="lab">直接 + 间接带动就业岗位</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="photo"><div class="ph"><img src="images/herdsman.jpg" alt="牧民"></div><div class="cap">牧民获得分红与技能培训 —— <i>共富不是口号</i></div></div>
+    </div>
+  </div>
+  <div class="foot"><div class="pn"><b>14</b> / 18 <i>共富飞轮 · 齿轮1 品质</i></div><div class="br">川山小牧喜 · <b>牧企同兴 川藏共富</b></div></div>
+</section>
+
+<!-- ═══════ P15 电商齿轮开篇 · 双域对开+实绩带式 ═══════ -->
+<section class="slide">
+  <div class="head"><span class="chip gold">齿轮 2 · 电商齿轮</span><span class="crumb">项目模式 / 公域 + 私域全域运营</span><span class="pos"><b>15</b> / 18 <i>· 齿轮2</i></span></div>
+  <div class="gearbar"><span class="g past">齿轮1 · 品质</span><span class="g on">齿轮2 · 电商</span><span class="g">齿轮3 · 触点</span></div>
+  <h1><span class="thin">GEAR 2 · E-COMMERCE</span>公域种草引流 × 私域沉淀复购：<em>让流量变成留量</em></h1>
+  <h2 class="sub">肉香更需世人闻。多平台内容矩阵完成品牌曝光与用户教育，小程序与会员社群承接信任与复购——<b>「公域种草引流 + 私域沉淀复购」双轮驱动</b>。</h2>
+  <div class="body">
+    <div class="row c2e">
+      <div class="card">
+        <h3>公域端 · 多平台矩阵种草 <span class="en">ACQUISITION</span><span class="tag blue">引流蓄势</span></h3>
+        <p><b class="k">抖音 / 小红书 / 今日头条</b>等多平台矩阵联动，以松潘牦牛为主题打造爆款微纪录片与场景化种草内容，精准触达健康饮食、地方特产消费群体，高效完成品牌曝光与用户教育。</p>
+        <div class="row c2e" style="margin-top:1.2vh">
+          <div class="stat"><div class="num">15<small>万+</small></div><div class="lab">爆款内容累计播放</div></div>
+          <div class="stat gt"><div class="num">1000<small>+</small></div><div class="lab">累计点赞互动</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>私域端 · 沉淀与复购 <span class="en">RETENTION</span><span class="tag">转化收割</span></h3>
+        <p><b class="k">小程序商城 + 会员社群</b>沉淀用户，联动<b class="k">美团 / 抖音团购</b>与线下门店，打通线上种草与线下核销，形成可持续的用户运营体系。</p>
+        <div class="row c3" style="margin-top:1.2vh">
+          <div class="stat"><div class="num" style="font-size:clamp(16px,2.6vh,28px)">45<small>%</small></div><div class="lab">小程序复购率</div></div>
+          <div class="stat gt"><div class="num" style="font-size:clamp(16px,2.6vh,28px)">60<small>%</small></div><div class="lab">社群活跃度</div></div>
+          <div class="stat"><div class="num" style="font-size:clamp(16px,2.6vh,28px)">80<small>%</small></div><div class="lab">门店团购核销率</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>从「初次种草」到「持续复购」的商业闭环</h3>
+      <div class="chain">
+        <div class="nd"><b>内容种草</b><span>公域矩阵触达</span></div>
+        <div class="nd"><b>用户沉淀</b><span>小程序 · 会员社群</span></div>
+        <div class="nd"><b>转化成交</b><span>电商 · 团购 · 门店</span></div>
+        <div class="nd"><b>持续复购</b><span>45% 复购率验证</span></div>
+      </div>
+    </div>
+    <div class="row c4">
+      <div class="stat"><div class="num" style="font-size:clamp(16px,2.7vh,30px)">86<small> 条</small></div><div class="lab">累计原创内容作品</div></div>
+      <div class="stat gt"><div class="num" style="font-size:clamp(16px,2.7vh,30px)">百万<small>级</small></div><div class="lab">三平台累计播放量</div></div>
+      <div class="stat"><div class="num" style="font-size:clamp(16px,2.7vh,30px)">5000<small>+</small></div><div class="lab">全平台累计涨粉</div></div>
+      <div class="stat gt"><div class="num" style="font-size:clamp(16px,2.7vh,30px)">五大<small>系列</small></div><div class="lab">助农溯源/美食/共富/IP/爆品</div></div>
+    </div>
+  </div>
+  <div class="foot"><div class="pn"><b>15</b> / 18 <i>共富飞轮 · 齿轮2 电商</i></div><div class="br">川山小牧喜 · <b>牧企同兴 川藏共富</b></div></div>
+</section>
+
+<!-- ═══════ P16 私域转化 · 侧边数据墙式 ═══════ -->
+<section class="slide">
+  <div class="head"><span class="chip gold">齿轮 2 · 电商齿轮</span><span class="crumb">项目模式 / 私域转化与团购联动</span><span class="pos"><b>16</b> / 18 <i>· 齿轮2</i></span></div>
+  <h1><span class="thin">GEAR 2 · E-COMMERCE — 留量比流量更值钱</span>私域矩阵沉淀用户，<em>团购联动</em>打通全链路</h1>
+  <h2 class="sub">小程序是交易场、社群是关系场、团购是放大器——<b>「种草 → 复购」全链路转化</b>在私域阵地内完成闭环。</h2>
+  <div class="body">
+    <div class="row c64">
+      <div style="display:flex; flex-direction:column; gap:1.5vh; min-height:0">
+        <div class="row c3" style="flex:none">
+          <div class="stat"><div class="num">45<small>%</small></div><div class="lab">小程序<b>复购率</b></div></div>
+          <div class="stat gt"><div class="num">60<small>%</small></div><div class="lab">社群成员<b>活跃度</b></div></div>
+          <div class="stat"><div class="num">80<small>%</small></div><div class="lab">门店团购<b>核销率</b></div></div>
+        </div>
+        <div class="card" style="flex:1">
+          <h3>小程序商城 · 交易主阵地 <span class="en">MINI-APP</span><span class="tag blue">注册用户 5 万+（路演口径）</span></h3>
+          <div class="row c3" style="margin-top:.2vh">
+            <div><p style="font-size:clamp(12px,1.55vh,14.5px)"><b class="k">冷鲜全部位</b><br>牛霖/上脑/西冷/牛腩…标营养与溯源信息，热门部位单品累计销量 <b class="k">3000+ 件</b></p></div>
+            <div><p style="font-size:clamp(12px,1.55vh,14.5px)"><b class="k">多场景礼盒</b><br>雪域盛宴/家庭聚会/滋补调养/节日限定，融藏族纹样与阿吉元素</p></div>
+            <div><p style="font-size:clamp(12px,1.55vh,14.5px)"><b class="k">健康即食</b><br>低温低盐牛肉干、卤制腱子肉、手撕牦牛肉</p></div>
+          </div>
+          <ul class="tight" style="margin-top:1vh">
+            <li>三步极简购买 + 京东冷链<b class="k">实时轨迹与温控数据展示</b></li>
+            <li>售后 <b class="k">1 小时响应</b>、48 小时内完成补发/退款</li>
+          </ul>
+        </div>
+        <div class="card" style="flex:1">
+          <h3>两级会员分红裂变 <span class="tag">一次邀请 · 永久收益</span></h3>
+          <div class="chain" style="margin-top:.5vh">
+            <div class="nd"><b>A 邀请 B</b><span>B 的消费按固定比例给 A 永久分红</span></div>
+            <div class="nd"><b>B 邀请 C</b><span>C 的消费按比例同时给 A、B</span></div>
+            <div class="nd"><b>实时结算</b><span>可抵扣消费或提现</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1.5vh; min-height:0">
+        <div class="card" style="flex:1.1">
+          <h3>团购联动 · 全域打通</h3>
+          <ul class="tight">
+            <li>美团 / 抖音团购承接<b class="k">公域种草流量</b></li>
+            <li>线上下单 → 门店核销（核销率 <b class="k">80%</b>）</li>
+            <li>到店扫码 → 沉淀私域 → 持续复购</li>
+            <li>数据驱动选品与渠道优化，反哺上游标准化</li>
+          </ul>
+        </div>
+        <div class="photo" style="flex:1"><div class="ph"><img src="images/store2.jpg" alt="门店"></div><div class="cap">线上种草 · 线下核销 —— <i>门店实景</i></div></div>
+        <div class="quote" style="flex:.55; display:flex; align-items:center">私域不是群发广告，而是<b>可反复触达、可裂变、可复购</b>的用户资产池。</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div class="pn"><b>16</b> / 18 <i>共富飞轮 · 齿轮2 电商</i></div><div class="br">川山小牧喜 · <b>牧企同兴 川藏共富</b></div></div>
+</section>
+
+<!-- ═══════ P17 公域矩阵 · 2x2 平台矩阵式 ═══════ -->
+<section class="slide">
+  <div class="head"><span class="chip gold">齿轮 2 · 电商齿轮</span><span class="crumb">项目模式 / 公域流量与种草矩阵</span><span class="pos"><b>17</b> / 18 <i>· 齿轮2</i></span></div>
+  <h1><span class="thin">GEAR 2 · E-COMMERCE — 内容即流量</span>多平台矩阵联动：<em>爆款内容破圈</em></h1>
+  <h2 class="sub">以高原纪实与美食内容撬动公域流量——<b>爆款微纪录片破圈 + 平台矩阵协同</b>，为品牌持续引流蓄势。</h2>
+  <div class="body">
+    <div class="row c2" style="flex:none">
+      <div class="stat" style="display:flex; align-items:center; justify-content:space-around; padding:1vh 1.5vw">
+        <span style="font-size:clamp(13px,1.7vh,16px); font-weight:700; color:var(--ink)">爆款微纪录片：</span>
+        <span style="font-family:'Noto Serif SC',serif;font-weight:900;color:var(--main);font-size:clamp(19px,3vh,30px)">15万+ 播放</span>
+        <span style="color:var(--line);font-size:20px">｜</span>
+        <span style="font-family:'Noto Serif SC',serif;font-weight:900;color:var(--gold-d);font-size:clamp(19px,3vh,30px)">1000+ 点赞</span>
+        <span style="color:var(--line);font-size:20px">｜</span>
+        <span style="font-family:'Noto Serif SC',serif;font-weight:900;color:var(--main);font-size:clamp(19px,3vh,30px)">#川山小牧喜 话题 20万+</span>
+      </div>
+    </div>
+    <div class="row c2e" style="flex:1">
+      <div class="card">
+        <h3>抖音 · 即时种草转化</h3>
+        <ul class="tight">
+          <li>「阿吉的日常 / 牧区四季 / 非遗技艺」三大标准化内容系列</li>
+          <li>电商橱窗上架小程序同款，<b class="k">短视频种草 → 橱窗成交</b>闭环</li>
+          <li>牧场溯源直播 + 带货 + 爆品宣发</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>小红书 · 圈层口碑种草</h3>
+        <ul class="tight">
+          <li>家常美食教程 · 藏地文化分享 · 餐厅探店 · 产品溯源四大方向</li>
+          <li>引导<b class="k">跳转小程序下单</b>，沉淀品质用户</li>
+          <li>统一视觉调性，专人运营评论区互动</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>视频号 · 助农故事</h3>
+        <ul class="tight">
+          <li>牧民共富故事 + 助农纪实，承接<b class="k">微信生态信任流量</b></li>
+          <li>小程序直接导流，转化路径最短</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>公众号 + 今日头条 · 广度覆盖</h3>
+        <ul class="tight">
+          <li>官方品牌告示 + 亲民内容双轨发布</li>
+          <li>覆盖中老年 / 下沉市场，扩大认知基本盘</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row c2" style="flex:none">
+      <div class="card" style="display:flex; align-items:center">
+        <p style="font-size:clamp(12.5px,1.6vh,15px)"><b class="k">人群定向：</b>成渝 25–45 岁品质家庭 / 文化体验消费者 / 新生代健康群体；结合<b class="k">藏历新年等消费旺季节点</b>集中投放；多条内容进入平台<b class="k">三农 / 乡村振兴流量池</b>。</p>
+      </div>
+      <div class="photo"><div class="ph"><img src="images/product.jpg" alt="产品"></div><div class="cap">内容种草 → 电商转化 —— <i>产品实拍</i></div></div>
+    </div>
+  </div>
+  <div class="foot"><div class="pn"><b>17</b> / 18 <i>共富飞轮 · 齿轮2 电商</i></div><div class="br">川山小牧喜 · <b>牧企同兴 川藏共富</b></div></div>
+</section>
+
+<!-- ═══════ P18 触点齿轮 · 时间线式 ═══════ -->
+<section class="slide">
+  <div class="head"><span class="chip" style="background:#2F7D5C">齿轮 3 · 触点齿轮</span><span class="crumb">项目模式 / 搭建线下体验场景</span><span class="pos"><b>18</b> / 18 <i>· 齿轮3</i></span></div>
+  <h1><span class="thin">GEAR 3 · TOUCHPOINT — 体验做深 · 闭环做实</span>线下触点：<em>三大路径</em>打通全域消费闭环</h1>
+  <h2 class="sub">当线上增长进入稳定期，线下触点成为<b>扩大市场、验证模式</b>的核心抓手：「一店一品 + 城市招募官 + 主题商演」三大路径并行推进。</h2>
+  <div class="body">
+    <div class="row c2">
+      <div class="tl" style="flex:1">
+        <div class="it">
+          <h4>一店一品 · 赋能小微餐饮 <span>已直签 6 家 · 持续扩展</span></h4>
+          <p style="font-size:clamp(12px,1.55vh,14.5px)">针对餐饮「门槛低、同质化、平台抽成高」痛点，为每家餐厅<b class="k">免费定制一款独家牦牛招牌菜</b>：专业团队包办 2–6 个月推广运营、核心食材直供、厨师团队研发引流菜。收益共享 <b class="k">零前置费用</b>，按菜品销售额阶梯分成：月流水&lt;5万 抽 <b class="k">1%</b> ｜ 5–10万 抽 <b class="k">2%</b> ｜ &gt;10万 可协商至约 <b class="k">7%</b>。</p>
+        </div>
+        <div class="it">
+          <h4>城市招募官 · 渠道裂变 <span>一次推荐 · 持续收益</span></h4>
+          <p style="font-size:clamp(12px,1.55vh,14.5px)">面向餐饮供应链从业者、美食博主、社区团长、餐饮培训师：<b class="k">牵线奖 300 元/店 + 签约奖 500 元/店 + 长期流水抽成</b>。典型案例：招募官雍某单月合计 <b class="k">9,495 元</b>（牵线奖 1,200 元 + 流水分成 8,295 元）。</p>
+        </div>
+        <div class="it">
+          <h4>主题商演 · 线下引流 <span>乐队联动</span></h4>
+          <p style="font-size:clamp(12px,1.55vh,14.5px)">与本土青年乐队合作主题商演累计 <b class="k">20 余场</b>，直接触达 <b class="k">1000+ 人次</b>，互动量超 <b class="k">1 万次</b>，持续为线下触点引流造势。</p>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1.5vh; min-height:0">
+        <div class="photo" style="flex:1.25"><div class="ph"><img src="images/queuing.jpg" alt="门店排队"></div><div class="cap">爆款单品门店实况 —— <i>排队即热度</i></div></div>
+        <div class="card" style="flex:1">
+          <h3>消费者体验闭环</h3>
+          <div class="chain">
+            <div class="nd"><b>到店体验</b><span>认知·口感记忆</span></div>
+            <div class="nd"><b>扫码复购</b><span>同款原料直购</span></div>
+            <div class="nd"><b>社交裂变</b><span>UGC 吸引新客</span></div>
+            <div class="nd"><b>数据反哺</b><span>热销驱动迭代</span></div>
+          </div>
+          <p class="note" style="margin-top:1vh">* 直签口径：截至报告期已签约 6 家餐厅（运营持续扩展中）；招募官案例来自项目运营台账。</p>
+        </div>
+      </div>
+    </div>
+    <div class="quote">把一次性地推成本转化为共享收益——<b>「线下体验种草、线上复购增收」</b>的新零售闭环由此成立。</div>
+  </div>
+  <div class="foot"><div class="pn"><b>18</b> / 18 <i>共富飞轮 · 齿轮3 触点</i></div><div class="br">川山小牧喜 · <b>牧企同兴 川藏共富</b></div></div>
+</section>
+
+</div>
+<div class="dots" id="dots"></div>
+<div class="hint">← → 方向键翻页 · 原省赛PPT P10–18 文字化重排版 v2</div>
+<script>
+  const deck = document.getElementById('deck');
+  const slides = [...document.querySelectorAll('.slide')];
+  const dotsBox = document.getElementById('dots');
+  slides.forEach((s, i) => { const a = document.createElement('a'); a.title = '第' + (10 + i) + '页';
+    a.addEventListener('click', e => { e.preventDefault(); s.scrollIntoView({behavior:'smooth'}); });
+    dotsBox.appendChild(a); });
+  const dots = [...dotsBox.children];
+  function onScroll(){ const idx = Math.max(0, Math.min(slides.length-1, Math.round(deck.scrollLeft / deck.clientWidth)));
+    dots.forEach((d, i) => d.classList.toggle('on', i === idx)); }
+  deck.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  document.addEventListener('keydown', e => { const w = deck.clientWidth;
+    if (e.key === 'ArrowRight') deck.scrollBy({left:w, behavior:'smooth'});
+    if (e.key === 'ArrowLeft') deck.scrollBy({left:-w, behavior:'smooth'}); });
+</script>
+</body>
+</html>
